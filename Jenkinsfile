@@ -16,12 +16,4 @@ node {
 
         step([$class: 'JUnitResultArchiver', testResults: 'test-reports/results.xml'])
     }
-
-    stage('Deliver') {
-        docker.image('cdrx/pyinstaller-linux:python2').inside {
-            sh 'pyinstaller --onefile sources/add2vals.py'
-        }
-
-        archiveArtifacts artifacts: 'dist/add2vals'
-    }
 }
