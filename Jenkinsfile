@@ -16,8 +16,8 @@ node {
 
         step([$class: 'JUnitResultArchiver', testResults: 'test-reports/results.xml'])
     }
-
-    def VOLUME = "$(pwd)/sources:/src"
+    
+    def VOLUME = "\$(pwd)/sources:/src"
     def IMAGE = "cdrx/pyinstaller-linux:python2"
 
     stage('Deploy') {
