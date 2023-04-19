@@ -18,6 +18,10 @@ node {
         step([$class: 'JUnitResultArchiver', testResults: 'test-reports/results.xml'])
     }
 
+    stage('Manual Approval'){
+        input message: 'Lanjutkan ke tahap Deploy?'
+    }
+
     stage('Deploy') {
         env.VOLUME = "${pwd()}/sources:/src"
         env.IMAGE = 'cdrx/pyinstaller-linux:python2'
@@ -29,5 +33,6 @@ node {
 
         archiveArtifacts "sources/dist/add2vals" 
         sh "docker run --rm -v ${env.VOLUME} ${env.IMAGE} 'rm -rf build dist'"
+        sleep 60
     }
 }
