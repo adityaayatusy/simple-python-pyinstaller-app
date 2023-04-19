@@ -30,8 +30,4 @@ node {
         archiveArtifacts "sources/dist/add2vals" 
         sh "docker run --rm -v ${env.VOLUME} ${env.IMAGE} 'rm -rf build dist'"
     }
-
-    options {
-        skipStagesAfterUnstable()
-    }
 }
